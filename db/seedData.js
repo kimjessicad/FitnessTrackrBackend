@@ -12,12 +12,13 @@ async function dropTables() {
   try {
     console.log("Dropping All Tables...");
 
-    await client.query(`
-  DROP TABLE IF EXISTS routineactivities;
-  DROP TABLE IF EXISTS routines;
-  DROP TABLE IF EXISTS activities;
-  DROP TABLE IF EXISTS users;
-  `);
+    await client.query(
+      `
+      DROP TABLE IF EXISTS routine_activities;
+      DROP TABLE IF EXISTS routines;
+      DROP TABLE IF EXISTS activities;
+      DROP TABLE IF EXISTS users;
+    `);
 
     console.log("Finished dropping tables!");
   } catch (error) {
@@ -47,13 +48,13 @@ async function createTables() {
     name VARCHAR(255) UNIQUE NOT NULL,
     goal TEXT NOT NULL
   );
-  CREATE TABLE routineactivities (
+  CREATE TABLE routine_activities (
     Id SERIAL PRIMARY KEY,
     "routineId" INTEGER REFERENCES routines(Id),
     "activityId" INTEGER REFERENCES activities(Id),
-    UNIQUE("routineId", "activityId")
     duration INTEGER,
-    count INTEGER
+    count INTEGER,
+    UNIQUE("routineId", "activityId")
   );
 `);
 
