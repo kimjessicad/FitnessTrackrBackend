@@ -44,7 +44,7 @@ describe("DB Routine Activities", () => {
     };
   });
 
-  describe("addActivityToRoutine({ routineId, activityId, count, duration })", () => {
+  xdescribe("addActivityToRoutine({ routineId, activityId, count, duration })", () => {
     it("creates a new routine_activity, and return it", async () => {
       const routineActivity = await addActivityToRoutine(routineActivityData);
       
@@ -55,8 +55,8 @@ describe("DB Routine Activities", () => {
     });
   });
 
-  describe("getRoutineActivityById", () => {
-    xit("should return the routine activity by id", async () => {
+  xdescribe("getRoutineActivityById", () => {
+    it("should return the routine activity by id", async () => {
       const fakeRoutineActivity = await createFakeRoutineActivity();
       const routineActivity = await getRoutineActivityById(
         fakeRoutineActivity.id
@@ -66,7 +66,7 @@ describe("DB Routine Activities", () => {
   });
 
   describe("getRoutineActivitiesByRoutine", () => {
-    xit("should return the routine activities for a routine", async () => {
+    it("should return the routine activities for a routine", async () => {
       const fakeUser = await createFakeUser("Timmy");
       const fakeActivity = await createFakeActivity(
         "Fortnite",

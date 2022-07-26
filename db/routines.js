@@ -1,4 +1,6 @@
+/* eslint-disable no-useless-catch */
 const client = require("./client");
+const {attachActivitiesToRoutines} = require("./activities");
 
 async function createRoutine({ creatorId, isPublic, name, goal }) {
   try {
@@ -8,6 +10,7 @@ async function createRoutine({ creatorId, isPublic, name, goal }) {
       `
       INSERT INTO routines("creatorId", "isPublic", "name", "goal") 
       VALUES($1, $2, $3, $4)
+      ON CONFLICT (name) DO NOTHING
       RETURNING *;
     `,
       [creatorId, isPublic, name, goal]
@@ -37,17 +40,20 @@ async function getRoutineById(id) {
   }
 }
 
-async function getRoutinesWithoutActivities() {}
+async function getRoutinesWithoutActivities() {
+
+}
 
 async function getAllRoutines() {
   try {
     const { rows } = await client.query(
       `
-      SELECT *
-      FROM routines;
+      SELECT routines.*, users.username AS "creatorName"
+      FROM routines
+      JOIN users ON routines."creatorId"=users.Id
     `);
 
-    return rows;
+    return attachActivitiesToRoutines(rows)
   } catch (error) {
     throw error;
   }

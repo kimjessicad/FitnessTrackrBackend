@@ -1,8 +1,9 @@
+/* eslint-disable no-useless-catch */
 const client = require("./client");
 
 async function addActivityToRoutine({routineId, activityId, count, duration}) {
   try {
-    console.log(routineId, activityId, count, duration, "words")
+
     const {
       rows: [routine_activity],
     } = await client.query(
@@ -10,7 +11,7 @@ async function addActivityToRoutine({routineId, activityId, count, duration}) {
       INSERT INTO routine_activities("routineId", "activityId", count, duration)
       VALUES($1, $2, $3, $4)
       ON CONFLICT ("routineId", "activityId") DO NOTHING
-      RETURNING *;
+      RETURNING *
     `,
       [routineId, activityId, count, duration]
     );
@@ -21,9 +22,35 @@ async function addActivityToRoutine({routineId, activityId, count, duration}) {
   }
 }
 
-async function getRoutineActivityById(id) {}
+async function getRoutineActivityById(id) {
+  try {
+    const {
+      rows: [routine],
+    } = await client.query(`
+    SELECT *
+    FROM routine_activities
+    WHERE id=${id};
+    `);
+    return routine
+  } catch (error) {
+    throw error;
+  }
+}
 
-async function getRoutineActivitiesByRoutine({ id }) {}
+async function getRoutineActivitiesByRoutine({ id }) {
+    try {
+    const {
+      rows: [routine],
+    } = await client.query(`
+    SELECT *
+    FROM routine_activities
+    WHERE routineid=${id};
+    `);
+    return routine
+  } catch (error) {
+    throw error;
+  }
+}
 
 async function updateRoutineActivity({ id, ...fields }) {}
 
