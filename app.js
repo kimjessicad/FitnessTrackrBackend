@@ -9,5 +9,13 @@ app.use(cors());
 // Setup your Middleware and API Router here
 const apiRouter = require('./api')
 app.use('/api', apiRouter)
+app.use((error, req, res, next)=>{
+    res.send({
+        name: error.name,
+        message: error.message,
+        error: error.message
+    })
+
+})
 
 module.exports = app;
