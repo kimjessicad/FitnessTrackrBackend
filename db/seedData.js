@@ -1,12 +1,35 @@
 // require in the database adapter functions as you write them (createUser, createActivity...)
 // const { } = require('./');
 const client = require("./client");
+
 const {
   createUser,
   getUser,
   getUserById,
   getUserByUsername,
 } = require("./users");
+
+const {
+  getAllActivities,
+  getActivityById,
+  getActivityByName,
+  attachActivitiesToRoutines,
+  createActivity,
+  updateActivity,
+} = require("./activities");
+
+const {
+  getRoutineById,
+  getRoutinesWithoutActivities,
+  getAllRoutines,
+  getAllPublicRoutines,
+  getAllRoutinesByUser,
+  getPublicRoutinesByUser,
+  getPublicRoutinesByActivity,
+  createRoutine,
+  updateRoutine,
+  destroyRoutine,
+} = require("./routines");
 
 async function dropTables() {
   try {
@@ -18,7 +41,8 @@ async function dropTables() {
       DROP TABLE IF EXISTS routines;
       DROP TABLE IF EXISTS activities;
       DROP TABLE IF EXISTS users;
-    `);
+    `
+    );
 
     console.log("Finished dropping tables!");
   } catch (error) {
@@ -44,12 +68,12 @@ async function createTables() {
   CREATE TABLE routines (
     id SERIAL PRIMARY KEY,
     "creatorId" INTEGER REFERENCES users(Id),
-    "IsPublic" BOOLEAN DEFAULT false,
+    "isPublic" BOOLEAN DEFAULT false,
     name VARCHAR(255) UNIQUE NOT NULL,
     goal TEXT NOT NULL
   );
   CREATE TABLE routine_activities (
-    Id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     "routineId" INTEGER REFERENCES routines(Id),
     "activityId" INTEGER REFERENCES activities(Id),
     duration INTEGER,

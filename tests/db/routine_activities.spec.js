@@ -44,10 +44,10 @@ describe("DB Routine Activities", () => {
     };
   });
 
-  describe("addActivityToRoutine({ routineId, activityId, count, duration })", () => {
-    xit("creates a new routine_activity, and return it", async () => {
+  xdescribe("addActivityToRoutine({ routineId, activityId, count, duration })", () => {
+    it("creates a new routine_activity, and return it", async () => {
       const routineActivity = await addActivityToRoutine(routineActivityData);
-
+      
       expect(routineActivity.routineId).toBe(routineActivityData.routineId);
       expect(routineActivity.activityId).toBe(routineActivityData.activityId);
       expect(routineActivity.count).toBe(routineActivityData.count);
@@ -55,8 +55,8 @@ describe("DB Routine Activities", () => {
     });
   });
 
-  describe("getRoutineActivityById", () => {
-    xit("should return the routine activity by id", async () => {
+  xdescribe("getRoutineActivityById", () => {
+    it("should return the routine activity by id", async () => {
       const fakeRoutineActivity = await createFakeRoutineActivity();
       const routineActivity = await getRoutineActivityById(
         fakeRoutineActivity.id
@@ -65,8 +65,8 @@ describe("DB Routine Activities", () => {
     });
   });
 
-  describe("getRoutineActivitiesByRoutine", () => {
-    xit("should return the routine activities for a routine", async () => {
+  xdescribe("getRoutineActivitiesByRoutine", () => {
+    it("should return the routine activities for a routine", async () => {
       const fakeUser = await createFakeUser("Timmy");
       const fakeActivity = await createFakeActivity(
         "Fortnite",
@@ -109,8 +109,8 @@ describe("DB Routine Activities", () => {
     });
   });
 
-  describe("destroyRoutineActivity(id)", () => {
-    xit("remove routine_activity from database", async () => {
+  xdescribe("destroyRoutineActivity(id)", () => {
+    it("remove routine_activity from database", async () => {
       const fakeRoutineActivity = await createFakeRoutineActivity();
 
       const deletedRoutine = await destroyRoutineActivity(
