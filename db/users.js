@@ -28,22 +28,17 @@ async function createUser({ username, password }) {
 }
 
 async function getUser({ username, password }) {
-  try {
-    const {
-      rows: [user],
-    } = await client.query(
-      `
-      SELECT id, username
-      FROM users
-      WHERE username=$1 AND password=$2;
-    `,
-      [username, password]
-    );
-
-    return user;
-  } catch (error) {
-    throw error;
-  }
+  const user = await getUserByUsername(username)
+  const hashedPassword = user.password;
+  const matchPassword = await bcrypt.compare(password, hashedPassword);
+    if (matchPassword){
+      delete user.password;
+      return user;
+    } else if(!matchPassword){
+      return ;
+    } else {
+      throw console.log("Password does not match")
+    }
 }
 
 async function getUserById(userId) {
