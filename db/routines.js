@@ -41,19 +41,21 @@ async function getRoutineById(id) {
   }
 }
 
-async function getRoutinesWithoutActivities() {}
-try {
-  const { rows } = await client.query(
-    `
+async function getRoutinesWithoutActivities() {
+  try {
+    const { rows } = await client.query(
+      `
     SELECT *
     FROM routines;
-  `);
-  if (!rows) {
-    return null;
+  `
+    );
+    if (!rows) {
+      return null;
+    }
+    return rows;
+  } catch (error) {
+    throw error;
   }
-  return rows;
-} catch (error) {
-  throw error;
 }
 
 async function getAllRoutines() {
