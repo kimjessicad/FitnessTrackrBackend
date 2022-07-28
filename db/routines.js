@@ -42,6 +42,19 @@ async function getRoutineById(id) {
 }
 
 async function getRoutinesWithoutActivities() {}
+try {
+  const { rows } = await client.query(
+    `
+    SELECT *
+    FROM routines;
+  `);
+  if (!rows) {
+    return null;
+  }
+  return rows;
+} catch (error) {
+  throw error;
+}
 
 async function getAllRoutines() {
   try {
