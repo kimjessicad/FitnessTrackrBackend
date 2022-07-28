@@ -108,10 +108,11 @@ async function attachActivitiesToRoutines(routines) {
 }
 
 async function updateActivity({ id, ...fields }) {
+  console.log( id, ...fields, "apple")
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
-
+    
   if (setString.length === 0) {
     return;
   }
