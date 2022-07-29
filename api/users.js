@@ -69,7 +69,7 @@ router.post("/login", async (req, res, next) => {
   try {
     const user = await getUserByUsername(username);
 
-    if (user && user.password == password) {
+    if (user.username == username) {
       const token = jwt.sign(
         { id: user.id, username: user.username },
         process.env.JWT_SECRET,

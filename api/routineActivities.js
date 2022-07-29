@@ -16,7 +16,7 @@ router.patch('/:routineActivityId', requireUser, async (req, res, next) => {
                 message: `User ${req.user.username} is not allowed to update ${routine.name}`,
             });
         }
-        const updatedRoutineActivity = await updateRoutineActivity({ id, duration, count });
+        const updatedRoutineActivity = await updateRoutineActivity({ id,  duration, count });
         res.send(updatedRoutineActivity);
     } catch ({ name, message }) {
         next({ name, message });
@@ -36,7 +36,7 @@ router.delete('/:routineActivityId', requireUser, async (req, res, next) => {
                 message: `User ${req.user.username} is not allowed to delete ${routine.name}`
             })
         }
-            await destroyRoutineActivity(id)
+           await destroyRoutineActivity(id)
             res.send(routineActivity)
     } catch (error) {
         next(error);

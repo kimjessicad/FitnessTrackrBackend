@@ -35,8 +35,8 @@ const {
   UnauthorizedError,
 } = require("../../errors");
 
-describe("/api/users", () => {
-  xdescribe("POST /api/users/register", () => {
+xdescribe("/api/users", () => {
+  describe("POST /api/users/register", () => {
     it("Creates a new user.", async () => {
       // Create some fake user data
       const fakeUserData = {
@@ -60,7 +60,7 @@ describe("/api/users", () => {
       });
     });
 
-    xit("EXTRA CREDIT: Hashes password before saving user to DB.", async () => {
+    it("EXTRA CREDIT: Hashes password before saving user to DB.", async () => {
       // Create some fake user data
       const fakeUserData = {
         username: faker.internet.userName(),
@@ -133,7 +133,7 @@ describe("/api/users", () => {
     });
   });
 
-  xdescribe("POST /api/users/login", () => {
+  describe("POST /api/users/login", () => {
     it("Logs in the user. Requires username and password, and verifies that hashed login password matches the saved hashed password.", async () => {
       // Create some fake user data
       const userData = {
@@ -201,7 +201,7 @@ describe("/api/users", () => {
     });
   });
 
-  xdescribe("GET /api/users/me", () => {
+  describe("GET /api/users/me", () => {
     it("sends back users data if valid token is supplied in header", async () => {
       const { fakeUser, token } = await createFakeUserWithToken();
 
@@ -223,7 +223,7 @@ describe("/api/users", () => {
     });
   });
 
-  xdescribe("GET /api/users/:username/routines", () => {
+  describe("GET /api/users/:username/routines", () => {
     it("Gets a list of public routines for a particular user.", async () => {
       // Create a fake user with a bunch of routines associated
       const { fakeUser, token } = await createFakeUserWithRoutinesAndActivities(

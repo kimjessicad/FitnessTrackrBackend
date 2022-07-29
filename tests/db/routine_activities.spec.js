@@ -22,7 +22,7 @@ const {
   createFakeUser,
 } = require("../helpers");
 
-describe("DB Routine Activities", () => {
+xdescribe("DB Routine Activities", () => {
   let fakeActivity;
   let fakeRoutine;
   let routineActivityData;
@@ -44,7 +44,7 @@ describe("DB Routine Activities", () => {
     };
   });
 
-  xdescribe("addActivityToRoutine({ routineId, activityId, count, duration })", () => {
+  describe("addActivityToRoutine({ routineId, activityId, count, duration })", () => {
     it("creates a new routine_activity, and return it", async () => {
       const routineActivity = await addActivityToRoutine(routineActivityData);
       
@@ -55,7 +55,7 @@ describe("DB Routine Activities", () => {
     });
   });
 
-  xdescribe("getRoutineActivityById", () => {
+  describe("getRoutineActivityById", () => {
     it("should return the routine activity by id", async () => {
       const fakeRoutineActivity = await createFakeRoutineActivity();
       const routineActivity = await getRoutineActivityById(
@@ -65,7 +65,7 @@ describe("DB Routine Activities", () => {
     });
   });
 
-  xdescribe("getRoutineActivitiesByRoutine", () => {
+  describe("getRoutineActivitiesByRoutine", () => {
     it("should return the routine activities for a routine", async () => {
       const fakeUser = await createFakeUser("Timmy");
       const fakeActivity = await createFakeActivity(
@@ -88,7 +88,7 @@ describe("DB Routine Activities", () => {
     });
   });
 
-  xdescribe("updateRoutineActivity({ id, count, duration })", () => {
+  describe("updateRoutineActivity({ id, count, duration })", () => {
     it("Finds the routine with id equal to the passed in id. Updates the count or duration as necessary.", async () => {
       const fakeRoutineActivity = await createFakeRoutineActivity();
 
@@ -109,7 +109,7 @@ describe("DB Routine Activities", () => {
     });
   });
 
-  xdescribe("destroyRoutineActivity(id)", () => {
+  describe("destroyRoutineActivity(id)", () => {
     it("remove routine_activity from database", async () => {
       const fakeRoutineActivity = await createFakeRoutineActivity();
 
@@ -125,7 +125,7 @@ describe("DB Routine Activities", () => {
     });
   });
 
-  xdescribe("canEditRoutineActivity", () => {
+  describe("canEditRoutineActivity", () => {
     it("should return true if routine activity can be edited by user", async () => {
       const fakeUser = await createFakeUser("Jay");
       const fakeRoutine = await createFakePublicRoutine(

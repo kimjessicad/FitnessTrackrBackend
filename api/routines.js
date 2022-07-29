@@ -58,7 +58,7 @@ router.delete('/:routineId', requireUser, async (req, res, next) => {
                 message: `User ${req.user.username} is not allowed to delete ${routine.name}`
             })
         }
-            const deleteRoutine = await destroyRoutine(id)
+            destroyRoutine(id)
             res.send(routine)
     } catch (error) {
         next(error);
@@ -67,17 +67,17 @@ router.delete('/:routineId', requireUser, async (req, res, next) => {
 
 // POST /api/routines/:routineId/activities
 router.post('/:routineId/activities', requireUser, async (req, res, next) => {
-    const id = req.params.routineId
+    const {routineId} = req.params
     const { activityId, duration, count } = req.body;
     const _activityId = await getRoutineActivityById(activityId)
     try {
         if (_activityId) {
             next({
                 name:"duplicate activityId",
-                message: `duplicate activityId`
+                message: `Activity ID ${activityId} already exists in Routine ID ${routineId}`
             })
         }else{
-            const newRoutine = await addActivityToRoutine({id, activityId, duration, count})
+            const newRoutine = await addActivityToRoutine({routineId, activityId, duration, count})
             res.send(newRoutine)
         }
     } catch (error) {
