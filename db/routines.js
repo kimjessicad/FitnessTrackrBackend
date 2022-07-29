@@ -28,7 +28,7 @@ async function getRoutineById(id) {
       rows: [routine],
     } = await client.query(
       `
-      SELECT id
+      SELECT *
       FROM routines
       WHERE id=$1
     `,
