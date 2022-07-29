@@ -1,3 +1,6 @@
+//individually testing will pass all tests.
+//sometimes if run simultaneously with other tests (usually routine activities), it will fail DELETE-Hard deletes a routine.
+
 const express = require('express');
 const router = express.Router();
 const { requireUser } = require("./utils");

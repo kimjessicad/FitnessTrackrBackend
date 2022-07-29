@@ -10,6 +10,13 @@ app.use(morgan('dev'));
 const apiRouter = require("./api");
 app.use("/api", apiRouter);
 
+app.get('*', (req, res)=>{
+  res.status(404).send({
+    error: "404 error",
+    message: "This is a 404 error"
+  })
+})
+
 app.use((error, req, res, next) => {
   res.send({
     name: error.name,
